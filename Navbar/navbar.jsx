@@ -5,11 +5,17 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles'; 
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import logoImage from '../src/assets/logo2.png';  
 
 function Navbar() {
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+  
+    navigate('/');
+  };
 
   return (
     <AppBar position="static" sx={{ 
@@ -24,13 +30,14 @@ function Navbar() {
         </Box>
         <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-start', gap: 2 }}>
           <Button color="inherit" component={RouterLink} to="/home" sx={{ color: 'black' }}>Home</Button>
-          <Button color="inherit" component={RouterLink} to="/search" sx={{ color: 'black' }}>Search</Button>
+          <Button color="inherit" component={RouterLink} to="/search" sx={{ color: 'black' }}>Search
+</Button>
           <Button color="inherit" component={RouterLink} to="/profile" sx={{ color: 'black' }}>Profile</Button>
-          <Button color="inherit" component={RouterLink} to="/log-out" sx={{ color: 'black' }}>Log Out</Button>
+          {}
+          <Button color="inherit" onClick={handleLogout} sx={{ color: 'black' }}>Log Out</Button>
         </Box>
       </Toolbar>
     </AppBar>
   );
 }
-
 export default Navbar;
