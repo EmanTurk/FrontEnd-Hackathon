@@ -1,29 +1,34 @@
-import Navbar from '../Navbar/navbar.jsx'
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import Navbar from '../Navbar/navbar.jsx';
 import "../Navbar/navstyle.css";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginBox from '../src/components/loginbox/LoginBox.jsx'; 
 import SignUp from '../src/components/loginbox/SignUp.jsx'; 
+import HomePage from './components/homePage.jsx'; 
+import Footer from './components/footer.jsx';
 
 function App() {
-
-  return (<>
-    <Navbar/>
-
+  return (
     <Router>
-    <div className="app-container">
-      <h1>Wellcome 2 ChatbotX</h1>
-      <h2>Your app for finding a volunteer partner</h2>
+      <RoutesWithNavbar />
+    </Router>
+  );
+}
 
+function RoutesWithNavbar() {
+  const location = useLocation();
+  const showNavbar = !['/', '/signup'].includes(location.pathname);
+
+  return (
+    <>
+      {showNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<LoginBox />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/home" element={<HomePage />} />
       </Routes>
-    </div>
-  </Router>
-   
-  </>
-  
-  )
+    </>
+  );
 }
 
 export default App;
