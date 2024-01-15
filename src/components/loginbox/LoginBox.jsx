@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; 
 import './LoginBox.css';
 
 const LoginBox = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const isValidEmail = (email) => {
+    return /\S+@\S+\.\S+/.test(email);
+  };
 
   const handleLogin = () => {
     console.log('Logging in with:', { email, username, password });
+    if (isValidEmail(email)) {
+      navigate('/home');
+    } else {
+      alert('Please enter a valid email address.');
+    }
   };
 
   return (
@@ -27,31 +37,31 @@ const LoginBox = () => {
       <label>
         Username:
         <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter your username"
-        />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter your password"
-        />
-      </label>
-      <br />
-      <button onClick={handleLogin}>Login</button>
-      <p>
-        Don't have an account yet?{' '}
-        <a href="/signup">Sign Up</a>
-      </p>
-    </div>
-  );
+          type
+="text"
+value={username}
+onChange={(e) => setUsername(e.target.value)}
+placeholder="Enter your username"
+/>
+</label>
+<br />
+<label>
+Password:
+<input
+type="password"
+value={password}
+onChange={(e) => setPassword(e.target.value)}
+placeholder="Enter your password"
+/>
+</label>
+<br />
+<button onClick={handleLogin}>Login</button>
+<p>
+Don't have an account yet?{' '}
+<Link to="/signup">Sign Up</Link> {}
+</p>
+</div>
+);
 };
 
 export default LoginBox;
-

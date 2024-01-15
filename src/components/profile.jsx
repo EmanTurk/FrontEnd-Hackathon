@@ -1,20 +1,24 @@
-import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { useTheme } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
-import yamImage from "../assets/yam.jpg";
+import React, { useContext } from 'react';
+import { UserContext } from '../userContext';
+
+
+// const userData = [];
 
 function ProfilePage() {
   const theme = useTheme();
-  const user = {
-    name: 'Amar Dor',
-    age: 21,
-    location: 'North',
-    skills: ["Gardening", "Food Distribution", "Elderly Assistance"],
-    imageUrl: yamImage,
-  };
+  const { user } = useContext(UserContext); 
+
+    console.log(user)
+ 
+//   const data = userData.push({   name: '' ,
+//   location: '',
+//   skills: [],
+//   imageUrl: '' });
 
   return (
     <Box sx={{ p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -42,6 +46,7 @@ skill} variant="body1" component="div" sx={{ backgroundColor: theme.palette.back
 </Paper>
 </Box>
 );
-}
+};
+
 
 export default ProfilePage;

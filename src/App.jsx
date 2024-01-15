@@ -8,6 +8,8 @@ import HomePage from './components/homePage.jsx';
 import Footer from './components/footer.jsx';
 import ProfilePage from './components/profile.jsx'; 
 import SearchPage from "./components/searchPage.jsx";
+import WelcomePage from "./components/forumPage.jsx";
+import ActivityPage from "./components/ActivityPage.jsx"
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function RoutesWithNavbar() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/search" element={<SearchPage />} /> 
+        <Route path="/forumPage" element={<WelcomePage />} /> 
+        <Route path="/activityPage/:id" element={<ActivityPage />} /> 
       </Routes>
     </>
   );

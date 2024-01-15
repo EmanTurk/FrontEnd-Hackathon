@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [newUsername, setNewUsername] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSignUp = () => {
     console.log('Signing up with:', { newUsername, newEmail, newPassword });
+
+    
+
+    navigate('/forumPage'); 
   };
 
   return (

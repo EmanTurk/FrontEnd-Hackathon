@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import amirImage from "../assets/amir.jpg";
 import danaImage from "../assets/dana.jpg";
 import yamImage from "../assets/yam.jpg";
@@ -8,9 +8,12 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const HomePage = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [activities, setActivities] = useState([])
+    const navigate = useNavigate()
   const users = [
     {
       name: "Yulia Or",
@@ -74,7 +77,33 @@ const HomePage = () => {
     console.log(action, users[currentIndex]);
 };
 
+useEffect(()=>{
+    try{
+        const res = async ()=>{
+            const result = await axios("https://chatbotx-v0qa.onrender.com/api/v1/activities")
+            setActivities(result.data)
+        }
+        res()
+    }catch(err){
+        console.log(err)
+    }
+   
+},[])
+
+const drawActivites = ()=>{
+    return activities.map((act)=>{
+        return <Box sx={{ display: 'flex', justifyContent: 'center', p: 2 }} onClick={()=> navigate(`/activityPage/${act._id}`)}>
+<Card sx={{ maxWidth: 300 }}>
+<CardContent>
+<Typography variant="h5" component="div"> {act.name}</Typography>
+<Typography variant="h5" component="div"> {act.description}</Typography>
+</CardContent>
+</Card>
+        </Box>
+    })
+}
 return (
+    <>
     <Box sx={{ display: 'flex', justifyContent: 'center', p: 2 }}>
         {users.length > 0 && currentIndex < users.length && (
             <Card sx={{ maxWidth: 300 }}>
@@ -101,6 +130,10 @@ return (
             </Card>
         )}
     </Box>
+    <div style={{display:'flex', gap:"20px", justifyContent:'center', alignItems:"center"}}>
+                {drawActivites()}    
+                </div>     
+    </>
 );
 };
 
